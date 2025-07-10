@@ -1,0 +1,40 @@
+{
+    "packages": [
+        {
+            "name": "buildmvc/mvcframework",
+            "version": "1.0",
+            "version_normalized": "1.0.0.0",
+            "dist": {
+                "type": "path",
+                "url": "MVCFramework",
+                "reference": "ddfa8a10757ba65b30ede8d7a508572ca0d43f89"
+            },
+            "type": "library",
+            "installation-source": "dist",
+            "autoload": {
+                "psr-4": {
+                    "Mvcframework\\": "framework/",
+                    "Illuminate\\": "framework/Illuminate/"
+                },
+                "files": [
+                    "framework/Helpers/mvc_helpers.php"
+                ]
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Azaze"
+                }
+            ],
+            "description": "Build New Framework With MVC",
+            "transport-options": {
+                "relative": true
+            },
+            "install-path": "../buildmvc/mvcframework"
+        }
+    ],
+    "dev": true,
+    "dev-package-names": []
+}

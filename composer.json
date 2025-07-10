@@ -1,0 +1,28 @@
+{
+  "name": "mvc/newproject",
+  "description": "Build New Project With MVC",
+  "type": "project",
+  "license": "MIT",
+  "version": "1.0",
+  "require": {
+    "php": "^8.0",
+    "buildmvc/mvcframework": "1.0"
+  },
+  "repositories": [
+    {
+      "type": "path",
+      "url": "MVCFramework"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "App\\": "app/"
+    }
+  },
+  "authors": [
+    {
+      "name": "Azaze"
+    }
+  ],
+  "minimum-stability": "dev"
+}

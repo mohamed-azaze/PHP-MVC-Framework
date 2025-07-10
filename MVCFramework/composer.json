@@ -1,0 +1,23 @@
+{
+  "name": "buildmvc/mvcframework",
+  "description": "Build New Framework With MVC",
+  "type": "library",
+  "license": "MIT",
+  "version": "1.0",
+  "autoload": {
+    "psr-4": {
+      "Mvcframework\\": "framework/",
+      "Illuminate\\": "framework/Illuminate/"
+    },
+    "files": [
+      "framework/Helpers/mvc_helpers.php"
+    ]
+  },
+  "authors": [
+    {
+      "name": "Azaze"
+    }
+  ],
+  "minimum-stability": "dev",
+  "require": {}
+}
