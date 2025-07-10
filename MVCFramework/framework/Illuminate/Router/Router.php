@@ -1,6 +1,8 @@
 <?php
 namespace Illuminate\Router;
 
+use Illuminate\Middleware\Middleware;
+
 class Router
 {
 
@@ -42,31 +44,66 @@ class Router
             if ($routes['method'] == $method) {
 
                 foreach ($routes as $route) {
-                    if ($route == $url) {
 
+                    if ($route == $url) {
                         if (is_array($routes['controller'])) {
 
-                            echo call_user_func([new $routes['controller'][0], $routes['controller'][1]]);
+                            if (isset($routes['middleware'])) {
+
+                                Middleware::middlewareHandler($url, $routes['middleware'],
+
+                                    static::controllerHandler($routes['controller'][0], $routes['controller'][1]));
+
+                            } else {
+
+                                echo call_user_func([new $routes['controller'][0], $routes['controller'][1]]);
+                            }
+
                         } elseif (is_callable($routes['controller'])) {
-                            (new $routes['middleware'])->handle($url, call_user_func($routes['controller']));
-                            // echo call_user_func($routes['controller']);
+
+                            if (isset($routes['middleware'])) {
+
+                                Middleware::middlewareHandler($url, $routes['middleware'], $routes['controller']);
+
+                            } else {
+
+                                echo call_user_func($routes['controller']);
+                            }
+
                         } elseif (new $routes['controller']) {
-                            echo call_user_func([new $routes['controller'], $conroller_method]);
+                            if (isset($routes['middleware'])) {
+
+                                Middleware::middlewareHandler($url, $routes['middleware'],
+                                    static::controllerHandler($routes['controller'], $conroller_method)
+                                );
+
+                            } else {
+
+                                echo call_user_func([new $routes['controller'], $conroller_method]);
+                            }
+
                         }
                     }
                 }
             }
         }
-        // var_dump($method);
     }
 
-    public function middleware(string $middleware)
+    public static function group(callable $fun)
     {
-        $middle = array_key_last(static::$allRoutes);
 
-        static::$allRoutes[$middle]['middleware'] = $middleware;
-
-        return $this;
-
+        var_dump(call_user_func($fun));
     }
+
+    protected static function controllerHandler(string | array $controller, string $method = null)
+    {
+        return function () use ($controller, $method) {
+            if (! is_null($method)) {
+                echo call_user_func([new $controller, $method]);
+            } else {
+                echo call_user_func([new $controller[0], $controller[1]]);
+            }
+        };
+    }
+
 }

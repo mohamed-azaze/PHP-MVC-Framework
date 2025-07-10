@@ -5,10 +5,11 @@ class AuthMiddleware
 {
     public function handle($request, $next)
     {
-        if (! isset($request['posts'])) {
-            return null;
+        if (! isset($_SESSION['TOKEN'])) {
+            return false;
         }
-        return $request;
+
+        return $next($request);
 
     }
 }
