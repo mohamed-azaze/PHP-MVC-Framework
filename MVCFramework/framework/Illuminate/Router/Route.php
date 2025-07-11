@@ -7,11 +7,20 @@ class Route extends Router
 {
     use methods;
 
-    public static function middleware(string | array $middleware): route
+    public function middleware(string | array $middleware): route
     {
         $middle = array_key_last(parent::$allRoutes);
 
         parent::$allRoutes[$middle]['middleware'] = $middleware;
+
+        return new static;
+
+    }
+
+    public static function middlewareGroup(string | array $middleware): route
+    {
+
+        static::$middleware[] = $middleware;
 
         return new static;
 

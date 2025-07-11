@@ -6,7 +6,8 @@ include "../resources/views/dashboard.blade.php";
 
 session_start();
 
-$_SESSION['TOKEN'] = true;
+// $_SESSION['TOKEN'] = true;
+$_SESSION['PASS'] = true;
 // session_destroy();
 
 (new Illuminate\Application)->start();

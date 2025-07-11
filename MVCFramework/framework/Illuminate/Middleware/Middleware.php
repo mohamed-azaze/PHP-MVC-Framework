@@ -3,14 +3,33 @@ namespace Illuminate\Middleware;
 
 class Middleware
 {
-    public static function middlewareHandler(string $request, string $middleware, callable $controller)
+    public static function middlewareHandler(string $request, string | array $middleware, callable $controller)
     {
-        $next = function ($request) use ($controller, $middleware) {
+        if (is_array($middleware)) {
 
-            return (new $middleware)->handle($request, $controller);
+            foreach ($middleware as $middle) {
+                $next = function ($request) use ($controller, $middle) {
 
-        };
+                    return (new $middle)->handle($request, $controller);
 
+                };
+
+            }
+        } else {
+            $next = function ($request) use ($controller, $middleware) {
+
+                return (new $middleware)->handle($request, $controller);
+
+            };
+
+        }
         return $next($request);
+        // $next = function ($request) use ($controller, $middleware) {
+
+        //     return (new $middleware)->handle($request, $controller);
+
+        // };
+
+        // return $next($request);
     }
 }

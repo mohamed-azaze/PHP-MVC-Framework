@@ -12,4 +12,9 @@ class PostsController
     {
         return "update from controller";
     }
+
+    public function new ()
+    {
+        return "new from controller";
+    }
 }

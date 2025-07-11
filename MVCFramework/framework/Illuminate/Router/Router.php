@@ -7,17 +7,27 @@ class Router
 {
 
     protected static array $allRoutes = [];
-    public static $middleware;
+
+    public static array $middleware = [];
 
     public static function add(string $method, string $route, $controller)
     {
         echo "<pre>";
+        $middleware = '';
+        if (self::group()) {
+            if (! empty(static::$middleware)) {
+
+                $middleLastKey = array_key_last(static::$middleware);
+                $middleware    = static::$middleware[$middleLastKey];
+            }
+        }
 
         static::$allRoutes[] = [
             "method"     => $method,
             "route"      => $route,
             "controller" => $controller,
         ];
+        $middleware != '' ? static::$allRoutes['middleware'] = $middleware : '';
 
     }
 
@@ -28,20 +38,29 @@ class Router
 
     public function dispatch(string $url, string $method)
     {
-        $url              = str_replace("/new-MVC-project/public/", "", $url);
-        $seprateUrl       = explode('.', $url);
+        $url = str_replace("/new-MVC-project/public/", "", $url);
+
+        $seprateUrl = explode('.', $url);
+
         $conroller_method = null;
+
         if (! is_null($seprateUrl) && count($seprateUrl) > 1) {
+
             $conroller_method = $seprateUrl[1];
-            $url              = $seprateUrl[0];
+
+            $url = $seprateUrl[0];
+
         } else {
             $url = $url;
         }
 
         $method = strtoupper($method);
 
+        // var_dump(static::$allRoutes);
+
         foreach (static::$allRoutes as $routes) {
-            if ($routes['method'] == $method) {
+
+            if ((isset($routes['method'])) && $routes['method'] == $method) {
 
                 foreach ($routes as $route) {
 
@@ -71,6 +90,7 @@ class Router
                             }
 
                         } elseif (new $routes['controller']) {
+
                             if (isset($routes['middleware'])) {
 
                                 Middleware::middlewareHandler($url, $routes['middleware'],
@@ -89,10 +109,14 @@ class Router
         }
     }
 
-    public static function group(callable $fun)
+    public static function group(callable $fun = null)
     {
+        if (! is_null($fun)) {
 
-        var_dump(call_user_func($fun));
+            call_user_func($fun, new self);
+
+        }
+        return true;
     }
 
     protected static function controllerHandler(string | array $controller, string $method = null)

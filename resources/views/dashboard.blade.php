@@ -14,8 +14,13 @@
     <br>
     <a href="user" style="color: #fff">user</a>
     <br>
-    <!--  <a href="users.update" style="color: #fff">click here</a>
-    <br>-->
+    <a href="post2" style="color: #fff">post2</a>
+    <br>
+    <a href="post3" style="color: #fff">post3</a>
+    <br>
+    <a href="new" style="color: #fff">new</a>
+    <br>
+
 </body>
 
 </html>
