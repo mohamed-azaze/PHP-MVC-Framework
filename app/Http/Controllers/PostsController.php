@@ -3,18 +3,18 @@ namespace App\Http\Controllers;
 
 class PostsController
 {
-    public function index()
+    public function index($id, $name)
     {
-        return "index from controller";
+        return "index from controller id = $id and name = $name";
     }
 
-    public function update()
+    public function update($id, $name)
     {
-        return "update from controller";
+        return "update from controller id = $id and name = $name";
     }
 
-    public function new ()
+    public function new ($id, $code)
     {
-        return "new from controller";
+        return "new from controller id = $id and code = $code";
     }
 }

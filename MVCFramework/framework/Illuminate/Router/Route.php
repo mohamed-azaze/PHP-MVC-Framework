@@ -11,18 +11,25 @@ class Route extends Router
     {
         $middle = array_key_last(parent::$allRoutes);
 
-        parent::$allRoutes[$middle]['middleware'] = $middleware;
+        if (is_string($middleware)) {
+
+            if (isset(parent::$allRoutes[$middle]['middleware'])) {
+
+                parent::$allRoutes[$middle]['middleware'] = [parent::$allRoutes[$middle]['middleware'], $middleware];
+
+            }
+        } else {
+
+            parent::$allRoutes[$middle]['middleware'] = $middleware;
+        }
 
         return new static;
-
     }
 
     public static function middlewareGroup(string | array $middleware): route
     {
-
         static::$middleware[] = $middleware;
 
         return new static;
-
     }
 }

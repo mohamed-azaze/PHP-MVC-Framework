@@ -13,12 +13,11 @@ class Application
 
         $this->webRoute();
 
-        // var_dump($this->router->getRoutes());
     }
 
     public function __destruct()
     {
-        $this->router->dispatch($_SERVER['REDIRECT_URL'], $_SERVER['REQUEST_METHOD']);
+        $this->router->dispatch(parse_url($_SERVER['REQUEST_URI'])['path'], $_SERVER['REQUEST_METHOD']);
     }
 
     function webRoute()

@@ -8,17 +8,17 @@
 </head>
 
 <body style="background-color: #494949;color:#c6bdbd">
-    <a href="posts" style="color: #fff">posts</a>
+    <a href="posts?id=5&name=mohamed" style="color: #fff">posts</a>
     <br>
-    <a href="users.update" style="color: #fff">users</a>
+    <a href="users.update?id=1000&name=tito" style="color: #fff">users</a>
     <br>
-    <a href="user" style="color: #fff">user</a>
+    <a href="user.index?id=8000&name=zoz" style="color: #fff">user</a>
     <br>
-    <a href="post2" style="color: #fff">post2</a>
+    <a href="post2?id=100&name=ahmed" style="color: #fff">post2</a>
     <br>
     <a href="post3" style="color: #fff">post3</a>
     <br>
-    <a href="new" style="color: #fff">new</a>
+    <a href="new?id=111&code=404" style="color: #fff">new</a>
     <br>
 
 </body>

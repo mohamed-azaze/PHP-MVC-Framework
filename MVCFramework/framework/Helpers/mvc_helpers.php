@@ -34,6 +34,16 @@ if (! function_exists("route_path")) {
 if (! function_exists("route")) {
     function route(string $url)
     {
+        // $spreate = explode('.', $url);
+        // if (count($spreate) > 1) {
+        //     $_SERVER['REDIRECT_URL']   = $spreate[0];
+        //     Router::$controller_method = $spreate[1];
+        //     echo $spreate[0];
+        // }
+        //  else {
+
+        //     echo $url;
+        // }
 
     }
 }
